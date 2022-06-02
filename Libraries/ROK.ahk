@@ -141,11 +141,17 @@ CaptureGovernor(ClickX, ClickY) {
     SaveFile := SaveFolder . "\" . GovernorName . "--3.png"
     CaptureScreen(1, 0, SaveFile)
     ; OCR the contents
-    Data_T1 := OcrArea(875, 341, 1120, 371)
-    Data_T2 := OcrArea(875, 375, 1120, 407) 
-    Data_T3 := OcrArea(875, 412, 1120, 444) 
-    Data_T4 := OcrArea(875, 450, 1120, 480) 
-    Data_T5 := OcrArea(875, 492, 1120, 518) 
+    Data_T1 := OcrArea(875, 341, 1120, 371) ; divide by 0.2 = kills
+    Data_T2 := OcrArea(875, 375, 1120, 407) ; divide by 2   = kills
+    Data_T3 := OcrArea(875, 412, 1120, 444) ; divide by 4   = kills 
+    Data_T4 := OcrArea(875, 450, 1120, 480) ; divide by 10  = kills 
+    Data_T5 := OcrArea(875, 492, 1120, 518) ; divide by 20  = kills 
+
+    Data_T1 := Format("{:d}", Data_T1 / 0.2)
+    Data_T2 := Format("{:d}", Data_T2 / 2)
+    Data_T3 := Format("{:d}", Data_T3 / 4)
+    Data_T4 := Format("{:d}", Data_T4 / 10)
+    Data_T5 := Format("{:d}", Data_T5 / 20)
 
     Data = %GovernorName%,%Data_ID%,%Data_Power%,%Data_KP%,%Data_Deads%,%Data_Assist%,%Data_Helps%,%Data_T1%,%Data_T2%,%Data_T3%,%Data_T4%,%Data_T5%,%CurrentDateTime%`n
     FileAppend, %Data%, %OutputFile%
