@@ -81,7 +81,7 @@ OcrArea(TopX, TopY, BotX, BotY) {
     BotY := BotY + WinY
     ; Perform the OCR
     Coords = %TopX% %TopY% %BotX% %BotY%
-    RunWait, C:\Progra~2\Capture2Text\Capture2Text_CLI.exe -s "%Coords%" --whitelist "0123456789" --clipboard --debug --debug-timestamp, , Hide
+    RunWait, C:\Progra~2\Capture2Text\Capture2Text_CLI.exe -s "%Coords%" --clipboard, , Hide ;  --debug --debug-timestamp
     ; Get the results from the clipboard
     ; Cleanup the output
     OCRText := trim(clipboard,"`n`r`t ")
