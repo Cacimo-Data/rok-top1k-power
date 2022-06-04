@@ -83,3 +83,15 @@ OcrArea(TopX, TopY, BotX, BotY) {
     return OCRText
 }
 
+; -----------------------------
+; Search an Array for a Value
+; -----------------------------
+InArray(Haystack, Needle) {
+    Loop % Haystack.MaxIndex()
+    {
+        if (Haystack[A_Index] = Needle) {
+            return true
+        }
+    }
+    return false
+}

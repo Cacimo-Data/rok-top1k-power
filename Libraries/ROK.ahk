@@ -89,6 +89,7 @@ GetGovernorName() {
 CaptureGovernor(ClickX, ClickY) {
     global SaveFolder
     global OutputFile
+    global GovernorIDs
 
     FormatTime, CurrentDateTime,, yyyy-MM-dd
 
@@ -104,6 +105,15 @@ CaptureGovernor(ClickX, ClickY) {
     CaptureScreen(1, 0, SaveFile)
     ; OCR the contents
     Data_ID := OcrArea(630, 215, 790, 248) 
+
+    ; Did we already see this governor?
+    if (InArray(GovernorIDs, Data_ID)) {
+        ClickSleep(65, 345, 350) ; back out
+        Log("We have already captured Governor %GovernorName% / ID %Data_ID%")
+        return 0
+    }
+    GovernorIDs.Push(Data_ID)
+
     Data_Power := OcrArea(734, 324, 880, 350) 
     Data_KP := OcrArea(910, 324, 1080, 350) 
 

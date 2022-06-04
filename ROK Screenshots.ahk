@@ -44,6 +44,7 @@ if WinExist("Rise of Kingdoms") {
 FormatTime, CurrentDateTime,, yyyy-MM-dd 
 SaveFolder := CreateSaveFolder(ConfigSavePath)
 OutputFile := CreateOutputFile(ConfigSavePath)
+GovernorIDs := []
 
 ; ------------------------------------------------
 ; Verify we are at the current user's City View
