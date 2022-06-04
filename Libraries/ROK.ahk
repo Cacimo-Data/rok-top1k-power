@@ -90,6 +90,7 @@ CaptureGovernor(ClickX, ClickY) {
     global SaveFolder
     global OutputFile
     global GovernorIDs
+    global LogFile
 
     FormatTime, CurrentDateTime,, yyyy-MM-dd
 
@@ -120,9 +121,12 @@ CaptureGovernor(ClickX, ClickY) {
 
     ; Click More Info
     if (!LoadMoreInfo(314, 552)) {
-        MsgBox Could not load More Info!
+        Log("Could not load more info panel for Governor %GovernorName% / ID %Data_ID%")
         return 0
     }
+
+    Log("Capturing Governor %GovernorName% / ID %Data_ID%")
+
     ; Save the screencap for later
     SaveFile := SaveFolder . "\" . GovernorName . "--2.png"
     CaptureScreen(1, 0, SaveFile)

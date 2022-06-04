@@ -44,6 +44,7 @@ if WinExist("Rise of Kingdoms") {
 FormatTime, CurrentDateTime,, yyyy-MM-dd 
 SaveFolder := CreateSaveFolder(ConfigSavePath)
 OutputFile := CreateOutputFile(ConfigSavePath)
+Log("Processing Started")
 GovernorIDs := []
 
 ; ------------------------------------------------
@@ -131,6 +132,8 @@ if (GovCount <= 1000) {
 ; Did we get a list of additional names to search?
 ; ------------------------------------------------
 if (FileExist(ExtraGovernorsFile)) {
+    Log("Capturing Extra Governors")
+
     tooltip %CancelMsg% // Capturing Extra Governors
 
     ClickSleep(50, 65, Delay) ; Click Governor Icon for the current user
@@ -161,6 +164,8 @@ if (FileExist(ExtraGovernorsFile)) {
     ClickSleep(1147,73,Delay) ; CLose the Settings
     ClickSleep(65, 345, 350) ; Close the Current User governor Window
 }
+
+Log("Processing Finished")
 
 ; Hotkey to kill the script early
 ^!x::ExitApp  ; Quit script with Ctrl+Alt+X

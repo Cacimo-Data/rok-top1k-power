@@ -49,6 +49,35 @@ CreateOutputFile(SavePath) {
 }
 
 ; -----------------------------
+; Send a message to teh log file
+; Create and initialize the Log file if needed
+; -----------------------------
+
+Log(Message) {
+    ; Set up some variables
+    FormatTime, CurrentDateTime,, yyyy-MM-dd 
+    LogPath :=  A_ScriptDir . "\Logs"
+    LogFile := LogPath . "\log-" . CurrentDateTime . ".txt"
+
+    ; Make sure the file exists
+    if (!FileExist(LogFile)) {
+        ; Make sure the path exists
+        if (!FileExist(LogPath)) {
+            FileCreateDir, LogPath
+        }
+        ; Create the file, set the encoding, etc
+        FormatTime, TS,, yyyy-MM-dd HH:mm:ss
+        Data := "[" . TS . "] Log File Initialized with encoding " . A_FileEncoding . "`n"
+        zml := FileOpen(LogFile, "a", A_FileEncoding)
+        zml.write(Data)
+        zml.close()
+    }
+    ; Write to the log file
+    FormatTime, TS,, yyyy-MM-dd HH:mm:ss
+    FileAppend [%TS%] %Message%`n, %LogFile%
+}
+
+; -----------------------------
 ; Click the mouse at a location, sleep for a duration
 ; This is used all over the place
 ; -----------------------------
