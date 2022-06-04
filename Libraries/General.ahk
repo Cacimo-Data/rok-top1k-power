@@ -63,7 +63,7 @@ Log(Message) {
     if (!FileExist(LogFile)) {
         ; Make sure the path exists
         if (!FileExist(LogPath)) {
-            FileCreateDir, LogPath
+            FileCreateDir, %LogPath%
         }
         ; Create the file, set the encoding, etc
         FormatTime, TS,, yyyy-MM-dd HH:mm:ss

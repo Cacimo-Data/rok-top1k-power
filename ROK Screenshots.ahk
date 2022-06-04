@@ -44,13 +44,13 @@ if WinExist("Rise of Kingdoms") {
 FormatTime, CurrentDateTime,, yyyy-MM-dd 
 SaveFolder := CreateSaveFolder(ConfigSavePath)
 OutputFile := CreateOutputFile(ConfigSavePath)
-Log("Processing Started")
 GovernorIDs := []
 
 ; ------------------------------------------------
 ; Verify we are at the current user's City View
 ; ------------------------------------------------
 if (!CheckCityView()) {
+    Log("User is not at the City View screen. Quitting.")
     MsgBox Please close the screen and go to the City View.
     Exit
 }
@@ -66,9 +66,9 @@ Use CTRL-ALT-X to cancel the ROK Statistics macro
 )
 tooltip %CancelMsg% // Capturing Governor %GovCount%, 0, -12
 
-; ------------------------------------------------
-; Ask where to start capturing governors,
-; ------------------------------------------------
+; Keep track of where we think we are in the list of governors
+; This prevents infinite loops.
+Log("Processing Started")
 GovCount := "1"
 
 if (GovCount <= 1000) {
@@ -80,7 +80,7 @@ if (GovCount <= 1000) {
     ClickSleep(330, 430, Delay) ; Individual Power Icon
 
     ; ------------------------------------------------
-    ; Start capturing governor info
+    ; Start capturing governor info. The first four are special
     ; ------------------------------------------------
     GovFound := CaptureGovernor(230, 255) ; Governor #1
     GovCount += 1
@@ -97,24 +97,30 @@ if (GovCount <= 1000) {
     GovFound := CaptureGovernor(230, 495) ; Governor #4
     GovCount += 1
     tooltip %CancelMsg% // Capturing Governor %GovCount%, 0, -12
-
+    
     ; Capture Governors 5-998
+    ; We click the same place on the screen, the list auto-scrolls
     While(GovCount <= 998) {
         GovFound := CaptureGovernor(230, 495) ; Governor #N
+        GovCount += 1
 
-        While (!GovFound) {
+        ; Didn't find a governor. Try again, but prevent infinite loops
+        While (!GovFound and GovCount <= 1000) {
+            Log("Didn't get Governor # %GovCount%. Scrolling down.")
             ; Drag the mouse to move the list and click the next Governor
             MouseClickDrag Left, 230, 575, 230, 495, 25
             GovFound := CaptureGovernor(230, 500) ; Governor #N+1
+            GovCount += 1
         }
-        GovCount += 1
         tooltip %CancelMsg% // Capturing Governor %GovCount%, 0, -12
     }
 
+    ; Capture Governor 999, also uses special coordinates
     GovFound := CaptureGovernor(230, 600) ; Governor #999
     GovCount += 1
     tooltip %CancelMsg% // Capturing Governor %GovCount%, 0, -12
 
+    ; Capture Governor 1000, also uses special coordinates
     GovFound := CaptureGovernor(230, 680) ; Governor #1000
     GovCount += 1
     tooltip %CancelMsg% // Capturing Governor %GovCount%, 0, -12
