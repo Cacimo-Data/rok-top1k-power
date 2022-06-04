@@ -3,10 +3,11 @@
 ;   Relative path to the main script: SavePath := "Output"
 ;   Absolute path to the main script: SavePath := "C:\Users\me\Documents\ROK"
 ; ------------------------------------------------
-SavePath := "Output"
+ConfigSavePath := "Output"
 
 ; ------------------------------------------------
 ; Standard time between clicks and screen captures (in milliseconds)
+; It's best not to change this.
 ; ------------------------------------------------
 Delay := 400
 

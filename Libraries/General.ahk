@@ -19,10 +19,8 @@ CenterWindow(WinTitle) {
 ; -----------------------------
 ; Create a folder, return the path
 ; -----------------------------
-CreateSaveFolder() {
-    global SavePath
-    global CurrentDateTime
-
+CreateSaveFolder(SavePath) {
+    FormatTime, CurrentDateTime,, yyyy-MM-dd 
     FolderName := "\Screenshots-" . CurrentDateTime
     FolderName := SavePath . "\" . FolderName
 
@@ -34,17 +32,15 @@ CreateSaveFolder() {
 ; Create and initialize the CSV file
 ; Overwrites an existing file with the same name+
 ; -----------------------------
-CreateOutputFile() {
-    global SavePath
-    global CurrentDateTime
-
+CreateOutputFile(SavePath) {
+    FormatTime, CurrentDateTime,, yyyy-MM-dd 
     OutputFile := SavePath . "\Statistics-" . CurrentDateTime . ".csv" 
 
     if (FileExist(OutputFile)) {
         FileDelete, %OutputFile%
     }
 
-    Data := "Governor,ID,Power,Kill_Points,Kills,Deads,RSS_Assitance,Helps,T1_Kills,T2_Kills,T3_Kills,T4_Kills,T5_Kills,Date`n"
+    Data := "Governor,ID,Power,Kill_Points,Deads,RSS_Assitance,Helps,T1_Kills,T2_Kills,T3_Kills,T4_Kills,T5_Kills,Date`n"
     zml := FileOpen(OutputFile, "a", UTF-8)
     zml.write(Data)
     zml.close()
@@ -68,8 +64,6 @@ ClickSleep(mouseX, mouseY, sleepMSec) {
 ; Uses Capture2Text (CLI Version)
 ; -----------------------------
 OcrArea(TopX, TopY, BotX, BotY) {
-    global SavePath
-
     clipboard := "EMPTY"
     ; Capture2Text uses the SCREEN, not the WINDOW
     ; Get the top-left corner of the ROK window

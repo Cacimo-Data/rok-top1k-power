@@ -42,8 +42,8 @@ if WinExist("Rise of Kingdoms") {
 ; Prepare the place to save our results
 ; ------------------------------------------------
 FormatTime, CurrentDateTime,, yyyy-MM-dd 
-SaveFolder := CreateSaveFolder()
-OutputFile := CreateOutputFile()
+SaveFolder := CreateSaveFolder(ConfigSavePath)
+OutputFile := CreateOutputFile(ConfigSavePath)
 
 ; ------------------------------------------------
 ; Verify we are at the current user's City View
@@ -68,18 +68,6 @@ tooltip %CancelMsg% // Capturing Governor %GovCount%, 0, -12
 ; Ask where to start capturing governors,
 ; ------------------------------------------------
 GovCount := "1"
-;Msg = 
-;(
-;Start at which governor? 
-;Enter a number from
-;1 to 1000
-;)
-;InputBox, GovCount, "Start at", %Msg%, , 200, 160, , , ,10, 1
-;if ErrorLevel {
-;    ExitApp
-;} Else {
-;    msgbox Ensure Governor No. %GovCount% is showing at the top of the list
-;}
 
 if (GovCount <= 1000) {
     ; ------------------------------------------------
