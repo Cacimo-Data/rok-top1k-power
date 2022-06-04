@@ -106,7 +106,8 @@ if (GovCount <= 1000) {
 
         ; Didn't find a governor. Try again, but prevent infinite loops
         While (!GovFound and GovCount <= 1000) {
-            Log("Didn't get Governor # %GovCount%. Scrolling down.")
+            GC = GovCount - 1
+            Log("Unable to load Governor # " . GC . ". Scrolling down.")
             ; Drag the mouse to move the list and click the next Governor
             MouseClickDrag Left, 230, 575, 230, 495, 25
             GovFound := CaptureGovernor(230, 500) ; Governor #N+1

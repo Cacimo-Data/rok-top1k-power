@@ -110,7 +110,7 @@ CaptureGovernor(ClickX, ClickY) {
     ; Did we already see this governor?
     if (InArray(GovernorIDs, Data_ID)) {
         ClickSleep(65, 345, 350) ; back out
-        Log("We have already captured Governor %GovernorName% / ID %Data_ID%")
+        Log("We have already captured Governor " . GovernorName . " / ID " . Data_ID)
         return 0
     }
     GovernorIDs.Push(Data_ID)
@@ -121,11 +121,11 @@ CaptureGovernor(ClickX, ClickY) {
 
     ; Click More Info
     if (!LoadMoreInfo(314, 552)) {
-        Log("Could not load more info panel for Governor %GovernorName% / ID %Data_ID%")
+        Log("Could not load more info panel for Governor " . GovernorName . " / ID " . Data_ID)
         return 0
     }
 
-    Log("Capturing Governor %GovernorName% / ID %Data_ID%")
+    Log("Capturing Governor " . GovernorName . " / ID " . Data_ID)
 
     ; Save the screencap for later
     SaveFile := SaveFolder . "\" . GovernorName . "--2.png"
