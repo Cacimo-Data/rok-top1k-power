@@ -32,9 +32,12 @@ CreateSaveFolder(SavePath) {
 ; Create and initialize the CSV file
 ; Overwrites an existing file with the same name+
 ; -----------------------------
-CreateOutputFile(SavePath) {
+CreateOutputFile(SavePath, ExtraNames := False) {
     FormatTime, CurrentDateTime,, yyyy-MM-dd 
     OutputFile := SavePath . "\Statistics-" . CurrentDateTime . ".csv" 
+    if (ExtraNames) {
+        OutputFile := SavePath . "\Statistics-Extra-" . CurrentDateTime . ".csv" 
+    }
 
     if (FileExist(OutputFile)) {
         FileDelete, %OutputFile%
@@ -123,4 +126,17 @@ InArray(Haystack, Needle) {
         }
     }
     return false
+}
+
+; -------------------------------
+; How many lines in a text file
+; -------------------------------
+CountFileLines(File) {
+    numlines := 0
+    
+    Loop, Read, %File%
+        If (Trim(A_LoopReadLine) != "") 
+            numlines++ ; Add one
+
+    Return numlines
 }

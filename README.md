@@ -37,17 +37,23 @@ No special setup is needed.
 
 ## Additional Info
 
+### Configuration
+
+A configuration file is offered. The available settings are:
+
+* `ConfigSavePath := 'Output'` -- The folder in which to save screenshots and output files.
+* `ExtraGovernorsFile := 'extra-names.txt` -- The name of a file to capture extra governors who are not in the top 1000 list.
+* `Delay := 400` -- The default time to wait (ms) for the ROK between-screen animations to finish. This value is not used everywhere in the code and is set to be as fast as possible without affecting accuracy.
+
 ### Extra Governors
 
-Create a file called **extra-names.txt** in the same folder as the **ROK Screenshots.ahk** script. The governor names in there will be searched one by one to capture the statsistics after the top 1000 governors are captured.
+Create a file called **extra-names.txt** in the same folder as the **ROK Screenshots.ah** script. The governor names in there will be searched one by one to capture the statsistics after the top 1000 governors are captured.
 
 * You may optionally choose to start with someone other than the first governor. This may be used for recovery should something go wrong. **Back up the output CSV file before restarting halfway through, It will wipe create the fine anew!**
 * The starting governor box waits 10 seconds and then automatically continues for unattended operations.
 * To skip the top 1000 completely, enter 9999 in the text entry box
 
-### Configuration
-
-A configuration file is offered, but there is nothing to change there. The default delay is not used everywhere in the code and has been already set to be as fast as possible without affecting accuracy.
+You may process only the extra governors by starting the `Screenshot Extra Names.ahk` script. Note, this script will create a file named **Statistics-Extra-YYYY-MM-DD.csv**  in the output folder and will not append to the usual **Statistics-YYYY-MM-DD.csv** file.
 
 ### Performance
 
