@@ -61,4 +61,6 @@ It takes approximately 1h 40m to process all 1000 governors. Your computer canno
 
 ## Odd things to Remember
 
-New Windows installations will ask to save screenshots to OneDrive. You may not want this. To change it, take a screenshot (Alt-PrtScn) and select "No Thanks".
+* **OneDrive** -- New Windows installations will ask to save screenshots to OneDrive. You may not want this. To change it, take a screenshot (Alt-PrtScn) and select "No Thanks".
+
+* **Disk Usage** -- The full scan of 1000 governors creates 3,000 PNG files which uses about 2.4 GB of disk space. Plan accordingly, especially if you scan often. There are few reasons to keep the images, mostly for debugging purposes, so you may want to decide how long to retain them.
