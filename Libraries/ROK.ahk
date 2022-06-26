@@ -165,3 +165,44 @@ CaptureGovernor(ClickX, ClickY) {
 
     Return 1
 }
+
+; ------------------------------
+; Reprocess the three PNG screencaps for one governor
+; Save the 
+; 
+; Paramters
+;   GovernorName - The name of a governor whose "GovernorName--1.png" file exists.
+;   Path         - Where to find the "GovernorName--1.png" file
+ReOCR(GovernorName, Path, ReprocessDate, OutputFile) {
+    ; GovernorName--1.png
+    SaveFile := Path . "\" . GovernorName . "--1.png"
+    Data_ID := ReOcrArea(SaveFile, 630, 215, 790, 248)
+    Data_Power := ReOcrArea(SaveFile, 734, 324, 880, 350) 
+    Data_KP := ReOcrArea(SaveFile, 910, 324, 1080, 350) 
+
+    ; GovernorName--2.png
+    SaveFile := Path . "\" . GovernorName . "--2.png"
+    Data_Deads := ReOcrArea(SaveFile, 925, 387, 1080, 417) 
+    Data_Assist := ReOcrArea(SaveFile, 925, 573, 1080, 605) 
+    Data_Helps := ReOcrArea(SaveFile, 925, 619, 1080, 652) 
+
+
+    ; GovernorName--3.png
+    SaveFile := Path . "\" . GovernorName . "--3.png"
+    Data_T1 := ReOcrArea(SaveFile, 875, 341, 1120, 371)
+    Data_T2 := ReOcrArea(SaveFile, 875, 375, 1120, 407)
+    Data_T3 := ReOcrArea(SaveFile, 875, 412, 1120, 444)
+    Data_T4 := ReOcrArea(SaveFile, 875, 450, 1120, 480)
+    Data_T5 := ReOcrArea(SaveFile, 875, 492, 1120, 518)
+
+    Data_T1 := Format("{:d}", Data_T1 / 0.2) ; divide by 0.2 = kills
+    Data_T2 := Format("{:d}", Data_T2 / 2)   ; divide by 2   = kills
+    Data_T3 := Format("{:d}", Data_T3 / 4)   ; divide by 4   = kills 
+    Data_T4 := Format("{:d}", Data_T4 / 10)  ; divide by 10  = kills 
+    Data_T5 := Format("{:d}", Data_T5 / 20)  ; divide by 20  = kills 
+
+    Data = %GovernorName%,%Data_ID%,%Data_Power%,%Data_KP%,%Data_Deads%,%Data_Assist%,%Data_Helps%,%Data_T1%,%Data_T2%,%Data_T3%,%Data_T4%,%Data_T5%,%ReprocessDate%`n
+    FileAppend, %Data%, %OutputFile%
+
+    Return 1
+}

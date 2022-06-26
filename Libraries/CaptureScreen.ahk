@@ -68,7 +68,7 @@ CaptureScreen(aRect = 0, bCursor = False, sFile = "", nQuality = "")
 	}
 
 	mDC := DllCall("CreateCompatibleDC", "ptr", 0, "ptr")
-	hBM := CreateDIBSection(mDC, nW, nH)
+	hBM := CreateDIBSection2(mDC, nW, nH)
 	oBM := DllCall("SelectObject", "ptr", mDC, "ptr", hBM, "ptr")
 	hDC := DllCall("GetDC", "ptr", 0, "ptr")
 	DllCall("BitBlt", "ptr", mDC, "int", 0, "int", 0, "int", nW, "int", nH, "ptr", hDC, "int", nL, "int", nT, "Uint", 0x40CC0020)
@@ -111,7 +111,7 @@ Zoomer(hBM, nW, nH, znW, znH)
 {
 	mDC1 := DllCall("CreateCompatibleDC", "ptr", 0, "ptr")
 	mDC2 := DllCall("CreateCompatibleDC", "ptr", 0, "ptr")
-	zhBM := CreateDIBSection(mDC2, znW, znH)
+	zhBM := CreateDIBSection2(mDC2, znW, znH)
 	oBM1 := DllCall("SelectObject", "ptr", mDC1, "ptr",  hBM, "ptr")
 	oBM2 := DllCall("SelectObject", "ptr", mDC2, "ptr", zhBM, "ptr")
 	DllCall("SetStretchBltMode", "ptr", mDC2, "int", 4)
@@ -175,7 +175,7 @@ Convert(sFileFr = "", sFileTo = "", nQuality = "")
 }
 
 
-CreateDIBSection(hDC, nW, nH, bpp = 32, ByRef pBits = "")
+CreateDIBSection2(hDC, nW, nH, bpp = 32, ByRef pBits = "")
 {
 	VarSetCapacity(bi, 40, 0)
 	NumPut(40, bi, "uint")
