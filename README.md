@@ -20,8 +20,8 @@ A tool for gathering statisics of the top 1000 Governors by Power in Rise of Kin
 ### Capture2Text
 
 * Download and unzip Capture2Text
-* Copy the extracted files to C:\Prorgram Files (x86)
-* Ensure `C:\Program Files (x86)\Capture2Text\Capture2Text.exe` exists. That's where the macro will look for it
+* Copy the extracted files to `C:\Prorgram Files (x86)`
+* Ensure `C:\Program Files (x86)\Capture2Text\Capture2Text_CLI.exe` exists. That's where the macro will look for it
 
 ### AutoHotKey
 
@@ -39,7 +39,7 @@ No special setup is needed.
 
 ### Configuration
 
-A configuration file is offered. The available settings are:
+A configuration file is offered. The available settings are below but none need to be changed.
 
 * `ConfigSavePath := 'Output'` -- The folder in which to save screenshots and output files.
 * `ExtraGovernorsFile := 'extra-names.txt` -- The name of a file to capture extra governors who are not in the top 1000 list.
@@ -47,13 +47,9 @@ A configuration file is offered. The available settings are:
 
 ### Extra Governors
 
-Create a file called **extra-names.txt** in the same folder as the **ROK Screenshots.ah** script. The governor names in there will be searched one by one to capture the statsistics after the top 1000 governors are captured.
+Sometime you want to capture the stats of Governors who aren't in the Top 1000 by Power. To do this, create a file called **extra-names.txt** in the same folder as the **ROK Screenshots.ah** script. The governor names in there will be searched one by one to capture the statsistics after the top 1000 governors are captured.
 
-* You may optionally choose to start with someone other than the first governor. This may be used for recovery should something go wrong. **Back up the output CSV file before restarting halfway through, It will wipe create the fine anew!**
-* The starting governor box waits 10 seconds and then automatically continues for unattended operations.
-* To skip the top 1000 completely, enter 9999 in the text entry box
-
-You may process only the extra governors by starting the `Screenshot Extra Names.ahk` script. Note, this script will create a file named **Statistics-Extra-YYYY-MM-DD.csv**  in the output folder and will not append to the usual **Statistics-YYYY-MM-DD.csv** file.
+You can process only the extra governors by starting the `Screenshot Extra Names.ahk` script. Note, this script will create a file named **Statistics-Extra-YYYY-MM-DD.csv**  in the output folder and will not append to the usual **Statistics-YYYY-MM-DD.csv** file.
 
 ### Performance
 
@@ -61,4 +57,6 @@ It takes approximately 1h 40m to process all 1000 governors. Your computer canno
 
 ## Odd things to Remember
 
-New Windows installations will ask to save screenshots to OneDrive. You may not want this. To change it, take a screenshot (Alt-PrtScn) and select "No Thanks".
+* **OneDrive** -- New Windows installations will ask to save screenshots to OneDrive. You may not want this. To change it, take a screenshot (Alt-PrtScn) and select "No Thanks".
+
+* **Disk Usage** -- The full scan of 1000 governors creates 3,000 PNG files which uses about 2.4 GB of disk space. Plan accordingly, especially if you scan often. There are few reasons to keep the images, mostly for debugging purposes, so you may want to decide how long to retain them.
