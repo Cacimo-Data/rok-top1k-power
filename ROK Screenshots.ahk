@@ -46,13 +46,30 @@ SaveFolder := CreateSaveFolder(ConfigSavePath)
 OutputFile := CreateOutputFile(ConfigSavePath)
 GovernorIDs := []
 
+GovCount := 1
+Msg = 
+(
+Start at which governor? 
+Enter a number from
+1 to 1000
+)
+InputBox, GovCount, "Start at", %Msg%, , 200, 160, , , ,10, 1
+if ErrorLevel {
+    ExitApp
+} Else {
+    msgbox Ensure Governor No. %GovCount% is showing at the top of the list
+}
+
+
 ; ------------------------------------------------
 ; Verify we are at the current user's City View
 ; ------------------------------------------------
-if (!CheckCityView()) {
-    Log("User is not at the City View screen. Quitting.")
-    MsgBox Please close the screen and go to the City View.
-    Exit
+if (GovCount = 1) {
+    if (!CheckCityView()) {
+        Log("User is not at the City View screen. Quitting.")
+        MsgBox Please close the screen and go to the City View.
+        ExitApp
+    }
 }
 
 ; ------------------------------------------------
@@ -69,7 +86,6 @@ tooltip %CancelMsg% // Capturing Governor %GovCount%, 0, -12
 ; Keep track of where we think we are in the list of governors
 ; This prevents infinite loops.
 Log("Processing Started")
-GovCount := "1"
 
 if (GovCount <= 1000) {
     ; ------------------------------------------------
@@ -102,12 +118,12 @@ if (GovCount <= 1000) {
     ; We click the same place on the screen, the list auto-scrolls
     While(GovCount <= 998) {
         GovFound := CaptureGovernor(230, 495) ; Governor #N
-        GovCount += 1
-
+        if (GovFound) {
+            GovCount += 1
+        }
         ; Didn't find a governor. Try again, but prevent infinite loops
         While (!GovFound and GovCount <= 1000) {
-            GC = GovCount - 1
-            Log("Unable to load Governor # " . GC . ". Scrolling down.")
+            Log("Unable to load Governor # " . GovCount . ". Scrolling down.")
             ; Drag the mouse to move the list and click the next Governor
             MouseClickDrag Left, 230, 575, 230, 495, 25
             GovFound := CaptureGovernor(230, 500) ; Governor #N+1
