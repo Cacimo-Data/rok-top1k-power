@@ -52,7 +52,7 @@ GovernorIDs := []
 if (!CheckCityView()) {
     Log("User is not at the City View screen. Quitting.")
     MsgBox Please close the screen and go to the City View.
-    Exit
+    ExitApp
 }
 
 ; ------------------------------------------------
