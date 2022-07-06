@@ -56,8 +56,6 @@ Enter a number from
 InputBox, GovCount, "Start at", %Msg%, , 200, 160, , , ,10, 1
 if ErrorLevel {
     ExitApp
-} Else {
-    msgbox Ensure Governor No. %GovCount% is showing at the top of the list
 }
 
 
