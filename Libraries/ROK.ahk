@@ -12,7 +12,7 @@
 ; Verify that we are on the City View screen
 ; -----------------------------
 CheckCityView() {
-    ImageSearch, FoundX, FoundY, 16, 632, 120, 737, %A_ScriptDir%\ImageClips\CityView.png
+    ImageSearch, FoundX, FoundY, 0, 625, 150, 750, *5 %A_ScriptDir%\ImageClips\CityView.png
     if (FoundX and FoundY) {
         return 1
     } else {
