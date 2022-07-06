@@ -68,7 +68,7 @@ if (GovCount = 1) {
         MsgBox Please close the screen and go to the City View.
         ExitApp
     }
-}
+
 
 ; ------------------------------------------------
 ; Set up the tooltip 
